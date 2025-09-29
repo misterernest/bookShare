@@ -1,3 +1,8 @@
+## Book Share
+
+This is a app made with yii2 and good practices (I'll try it), it is targered to share elements in this case books, at the future anything.
+
+
 <p align="center">
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
@@ -231,3 +236,4 @@ vendor/bin/codecept run functional,unit --coverage --coverage-html --coverage-xm
 ```
 
 You can see code coverage output under the `tests/_output` directory.
+
