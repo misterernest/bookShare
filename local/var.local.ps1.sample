@@ -1,0 +1,8 @@
+# env.local.ps1
+# This script sets up local environment variables for the PowerShell session.
+$env:DB_HOST = "localhost"
+$env:DB_NAME = "db_name_here"
+$env:DB_USER = "user_name_here"
+$env:DB_PASSWORD = "password_here"
+$env:API_PORT = "3306"
+$env:SALT = "BooksShareb5gdg5bkdaFSCUKQ9gC7Sd7qHEwrJPYqPZRL2eesl;keqrf"
