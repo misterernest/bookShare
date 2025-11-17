@@ -14,22 +14,15 @@ class ErnestoController extends Controller
     /**
      * Imports book data from a CSV file.
      */
-    
-
-    private function quick($book) {
-        $book->title = sprintf("%sffff", $book->title);
-        return $book;
-    }
-
     public function actionBooks($file) {
         $f = fopen($file, "r");
         while(!feof($f)) {
             $data = fgetcsv($f);
-            if (!empty($data[1]) && !empty($data{1})) {
+            if (!empty($data[1]) && !empty($data{2})) {
                 $book = new Book;
                 $book->title = $data[1];
-                $book->author = $data[2];
-                $book = $this->quick($book);
+                $book->author_id = 1;
+                $book->save();
                 printf("%s\n", $book->toString());
             }
         }
