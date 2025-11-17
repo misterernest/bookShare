@@ -5,7 +5,7 @@ create table if not exists users ();
 
 create table if not exists books (
     book_id integer unsigned primary key auto_increment,
-    title varchar(100) not null,
+    title varchar(500) not null,
     author_id integer unsigned not null
 ) Engine=InnoDB default charset=utf8mb4 collate=utf8mb4_bin;
 
