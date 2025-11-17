@@ -1,14 +1,21 @@
 <?php
 namespace app\models;
 
-use yii\base\Model;
+use yii\db\ActiveRecord;
 
-class Book extends Model
+class Book extends ActiveRecord
 {
-    public $title;
-    public $author;
+
+    public static function tableName()
+    {
+        return 'books';
+    }
+
+    public function getId() {
+        return $this->book_id;
+    }
 
     public function toString() {
-        return sprintf("%s - %s", $this->title, $this->author);
+        return sprintf("(%d) %s", $this->id, strtoupper($this->title));
     }
 }
