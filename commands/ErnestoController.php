@@ -2,6 +2,7 @@
 
 namespace app\commands;
 
+use app\models\Author;
 use app\models\Book;
 use yii\console\Controller;
 use yii\console\ExitCode;
@@ -19,14 +20,32 @@ class ErnestoController extends Controller
         while(!feof($f)) {
             $data = fgetcsv($f);
             if (!empty($data[1]) && !empty($data{2})) {
+                $author = Author::find()
+                    ->where(['name' => $data[2]])
+                    ->one();
+                if (empty($author)) {
+                    $author = new Author;
+                    $author->name = $data[2];
+                    $author->save();
+                }
+                
                 $book = new Book;
                 $book->title = $data[1];
-                $book->author_id = 1;
+                $book->author_id = $author->id;
                 $book->save();
                 printf("%s\n", $book->toString());
             }
         }
         fclose($f);
         return ExitCode::OK;
+    }
+
+    public function actionGetAuthorById($author_id) {
+        $author = Author::findOne($author_id);
+        if (empty($author)) {
+            printf("Author not found.\n");
+            return ExitCode::DATAERR;
+        }
+        printf("Author: (%d) %s\n", $author->id, strtoupper($author->name));
     }
 }
