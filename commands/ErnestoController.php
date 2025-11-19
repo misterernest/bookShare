@@ -46,6 +46,20 @@ class ErnestoController extends Controller
             printf("Author not found.\n");
             return ExitCode::DATAERR;
         }
-        printf("Author: (%d) %s\n", $author->id, strtoupper($author->name));
+        printf("Author: (%d) %s\n", $author->id, $author->toString());
+        foreach ($author->books as $book) {
+            printf(" - %s\n", $book->toString());
+        }
+    }
+
+    public function actionBook($book_id) {
+        $book = Book::findOne($book_id);
+        if (empty($book)) {
+            printf("Book not found.\n");
+            return ExitCode::DATAERR;
+
+        }
+        printf("%s\n", $book->toString());
+        return ExitCode::OK;
     }
 }
