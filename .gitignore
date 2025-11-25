@@ -33,5 +33,4 @@ tests/_support/_generated
 /.vagrant
 
 #local environment settings
-/local/var.local.ps1
-/web/.htaccess
+/local/.env
