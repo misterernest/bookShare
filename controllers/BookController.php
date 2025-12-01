@@ -10,9 +10,8 @@ use app\models\Book;
 class BookController extends Controller
 {
     public function actionAll() {
-
         $books = Book::find()->all();
-        return serialize($books);
+        return $this->render('all.tpl', ['books' => $books, 'title' => '3']);
     }
 
     public function actionDetail($id) {
