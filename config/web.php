@@ -46,9 +46,19 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '' => 'site/index',
                 'books' => 'book/all',
-                'book/<id>' => 'book/detail',
+                'book/<id:\d+>' => 'book/detail',
+                'authors' => 'author/all',
+                'author/search/<search:\w+>' => 'author/all',
+                'author/<id:\d+>' => 'author/detail',
+            ],
+        ],
+        'view' => [
+            'renderers' => [
+                'tpl' => [
+                    'class' => 'yii\smarty\ViewRenderer',
+                    //'cachePath' => '@runtime/Smarty/cache',
+                ],
             ],
         ],
     ],
