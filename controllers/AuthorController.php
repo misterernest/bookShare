@@ -30,6 +30,6 @@ class AuthorController extends Controller
             return $this->redirect(['author/all']);
         }
 
-        return $author->toString();
+        return $this->render('detail', ['author' => $author]);
     }
 }
