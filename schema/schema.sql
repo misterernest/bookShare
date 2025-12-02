@@ -1,7 +1,15 @@
 create database if not exists books_share;
 use books_share;
 
-create table if not exists users ();
+create table if not exists users (
+    user_id integer unsigned primary key auto_increment,
+    username varchar(100) not null unique,
+    password varchar(255) not null,
+    auth_key varchar(255),
+    access_token varchar(255),created_at timestamp not null default current_timestamp,
+    updated_at timestamp not null default current_timestamp 
+        on update current_timestamp
+) Engine=InnoDB default charset=utf8mb4 collate=utf8mb4_bin;
 
 create table if not exists books (
     book_id integer unsigned primary key auto_increment,
