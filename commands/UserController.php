@@ -32,4 +32,22 @@ class UserController extends Controller
         printf('nel\n');
         return ExitCode::OK;
     }
+
+    public function actionSetPassword($username, $password)
+    {
+        $user = User::findOne(['username' => $username]);
+        if (!empty($user)) {
+            $user->password = $user->hidePassword(
+                $password
+            );
+            if ($user->save()) {
+                printf("Password for user %s updated successfully.\n", $username);
+            } else {
+                printf("Failed to update password for user %s.\n", $username);
+            }
+        } else {
+            printf("User %s not found.\n", $username);
+        }
+
+    }
 }
