@@ -1,6 +1,5 @@
 {use class="Yii"}
 {use class="yii\helpers\Html"}
-{use class="app\models\Book"}
 <h1>Site index</h1>
 
 {if Yii::$app->user->isGuest}
