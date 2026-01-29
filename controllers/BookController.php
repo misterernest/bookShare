@@ -5,7 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\Book;
-
+use app\models\UserBook;
 
 class BookController extends Controller
 {
@@ -46,5 +46,18 @@ class BookController extends Controller
             }
         }
         return $this->render('form.tpl', ['book' => $book]);
+    }
+
+    public function actionIOwnThisBook($book_id) {
+        if (Yii::$app->user->isGuest) {
+            //only logged in users should be able to create new books
+            return $this->goHome();
+        }
+        $userBook = new UserBook;
+        $userBook->user_id = Yii::$app->user->identity->id;
+        $userBook->book_id = $book_id;
+        $userBook->save();
+        Yii::$app->session->setFlash('success', 'Book added to your collection.');
+        return $this->redirect(['book/detail', 'id' => $book_id]);
     }
 }
