@@ -6,6 +6,20 @@ use yii\db\ActiveRecord;
 class Book extends ActiveRecord
 {
 
+    public function attributeLabels()
+    {
+        return [
+            'title' => 'Title',
+        ];
+    }
+
+    public function rules() {
+        return [
+            [['title', 'author_id'], 'required'],
+            [['author_id', ], 'integer'],
+        ];
+    }
+
     public static function tableName()
     {
         return 'books';
