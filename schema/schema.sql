@@ -63,3 +63,16 @@ create table if not exists book_scores (
     modified_at timestamp not null default current_timestamp on update current_timestamp,
     unique key no_rep(user_id, book_id)
 ) Engine=InnoDB default charset=utf8mb4 collate=utf8mb4_bin;
+
+
+////////////////////////
+
+
+create table if not exists user_books (
+    user_books_id integer unsigned primary key auto_increment,
+    user_id integer unsigned not null,
+    book_id integer unsigned not null,
+    created_at timestamp not null default current_timestamp,
+    modified_at timestamp not null default current_timestamp on update current_timestamp,
+    unique key no_rep(user_id, book_id)
+) Engine=InnoDB default charset=utf8mb4 collate=utf8mb4_bin;
