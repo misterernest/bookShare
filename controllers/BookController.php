@@ -23,7 +23,7 @@ class BookController extends Controller
             return $this->goHome();
         }
 
-        return $book->toString();
+        return $this->render('detail.tpl', ['book' => $book]);
     }
 
     public function actionNew() {
