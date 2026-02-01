@@ -157,4 +157,13 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         }
         return parent::beforeSave($insert);
     }
+
+    public function hasBook($book_id):bool {
+        $userBook = UserBook::find()->where([
+            'user_id' => $this->id,
+            'book_id' => $book_id,
+        ])->all();
+        
+        return !empty($userBook);
+    }
 }
