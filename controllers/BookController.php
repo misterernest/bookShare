@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use app\models\Book;
 use app\models\UserBook;
+use app\models\BookScore;
 
 class BookController extends Controller
 {
@@ -17,13 +18,23 @@ class BookController extends Controller
     public function actionDetail($id) {
 
         $book = Book::findOne($id);
+        
         if (empty($book)) {
             // return $this->redirect(['site/index']);
             Yii::$app->session->setFlash('success', 'Book not found.');
             return $this->goHome();
         }
+        $bookScore = new BookScore();
+        return $this->render('detail.tpl', [
+            'book' => $book, 
+            'book_score' => $bookScore
+        ]);
+    }
 
-        return $this->render('detail.tpl', ['book' => $book]);
+    public function actionScore() {
+        $bookScore = new BookScore();
+        if ($bookScore->load(Yii::$app->request))
+        return $this->redirect(['book/detail', ]);
     }
 
     public function actionNew() {
