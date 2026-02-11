@@ -25,6 +25,7 @@ class BookController extends Controller
             return $this->goHome();
         }
         $bookScore = new BookScore();
+        $bookScore->book_id = $book->id;
         return $this->render('detail.tpl', [
             'book' => $book, 
             'book_score' => $bookScore
@@ -33,8 +34,16 @@ class BookController extends Controller
 
     public function actionScore() {
         $bookScore = new BookScore();
-        if ($bookScore->load(Yii::$app->request))
-        return $this->redirect(['book/detail', ]);
+        if ($bookScore->load(Yii::$app->request->post())) {
+            $bookScore->user_id = Yii::$app->user->identity->id;
+            if ($bookScore->validate()) {
+                if ($bookScore->save()) {
+                    Yii::$app->session->setFlash('success', 'Book scored successfully.');
+                    return $this->redirect(['book/detail', 'id' => $bookScore->book_id]);
+                }
+            }
+        }
+        return $this->redirect(['book/all', ]);
     }
 
     public function actionNew() {
