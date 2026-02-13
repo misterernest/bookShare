@@ -3,10 +3,15 @@
 <h1>Site index</h1>
 
 {if Yii::$app->user->isGuest}
-hola invitado, {Html::a('login', ['site/login'])} 👋👋
+    hola invitado, {Html::a('login', ['site/login'])} 👋👋
 {else}
-hola {Yii::$app->user->identity->username} 👋👋
+    hola {Yii::$app->user->identity->username} 👋👋
 {/if}
 
-<p>Hay {$book_count} libros en el sistema</p>
-<p>{Html::a('Crear libro', ['book/new'])}</p>
+<p>There are {Html::a("{$book_count} books", ['book/all'])} and 
+    {Html::a("{$author_count} authors", ['author/all'])}
+</p>
+{if !Yii::$app->user->isGuest}
+    <p>{Html::a('Create a book', ['book/new'])}</p>
+    <p>{Html::a('Add new Author', ['author/new'])}</p>
+{/if}
