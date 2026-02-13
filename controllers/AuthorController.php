@@ -14,11 +14,31 @@ class AuthorController extends Controller
             $authors = Author::find()
                 ->where(['like', 'name', $search])
                 ->all();
-            return serialize($authors);
+            return $this->render('all.tpl', ['authors' => $authors]);
         }
 
-        $authors = Author::find()->all();
-        return serialize($authors);
+        $authors = Author::find()->orderBy('name')->all();
+        
+        return $this->render('all.tpl', ['authors' => $authors]);
+    }
+
+    public function actionNew() {
+        if(Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $author = new Author();
+        if($author->load(Yii::$app->request->post())) {
+            if($author->validate()) {
+                if($author->save()) {
+                    Yii::$app->session->setFlash(
+                        'success',
+                        sprintf('Author "%s" created successfully.', $author->name)
+                    );
+                }
+            }
+        }
+        return $this->render('new.tpl', ['author' => $author]);
     }
 
     public function actionDetail($id) {
