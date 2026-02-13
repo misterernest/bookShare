@@ -5,7 +5,9 @@
 {if Yii::$app->user->isGuest}
     hola invitado, {Html::a('login', ['site/login'])} 👋👋
 {else}
-    hola {Yii::$app->user->identity->username} 👋👋
+{assign "user" Yii::$app->user->identity}
+    <p>hola {$user->username} 👋👋</p>
+    <p>You have voted {$user->votesCount} times and the average is {$user->votesAvg}.</p>
 {/if}
 
 <p>There are {Html::a("{$book_count} books", ['book/all'])} and 
