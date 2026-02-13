@@ -41,4 +41,23 @@ class Book extends ActiveRecord
         return $this->hasOne(Author::class, ['author_id' => 'author_id'])
         ->one();
     }
+
+    public function getVotes() {
+        return $this->hasMany(BookScore::class, ['book_id' => 'book_id'])->all();
+    }
+
+    public function getAverageScore():string {
+        $score = 0;
+        $i = 0;
+        foreach ($this->votes as $vote) {
+            $i++;
+            $score += $vote->score;
+        }
+        
+        if ($i == 0) {
+            return 0;
+        }
+
+        return sprintf("%0.2f (%d votes)", $score/$i, $i);
+    }
 }

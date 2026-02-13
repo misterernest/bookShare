@@ -5,7 +5,9 @@
 {title}{$book->title}{/title}
 <h1>{$this->title}</h1>
 
-<p>Un libro de {$book->author->name}.</p>
+<p>A book from {$book->author->name}.</p>
+
+<p>The average score is {$book->getAverageScore()}.</p>
 
 {if Yii::$app->user->identity->hasBook($book->id)}
     <p>You own this book.</p>
