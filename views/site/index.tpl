@@ -14,6 +14,7 @@
     {Html::a("{$author_count} authors", ['author/all'])}
 </p>
 {if !Yii::$app->user->isGuest}
+    <h4>Actions:</h4>
     <p>{Html::a('Create a book', ['book/new'])}</p>
     <p>{Html::a('Add new Author', ['author/new'])}</p>
 {/if}
